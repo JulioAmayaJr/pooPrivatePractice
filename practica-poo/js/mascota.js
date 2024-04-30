@@ -7,11 +7,11 @@ class Mascota{
       }
 
       listarMascotas(){
-        fetch('http://localhost/practica-poo/select.php', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
+        var formData=new FormData();
+        formData.append("accion","Mostrar")
+        fetch('http://localhost/practica-poo/data.php', {
+            method: 'POST',
+            body: formData
           })
           .then(response => response.json())
           .then(data => {
@@ -83,12 +83,12 @@ class Mascota{
       }
 
       listarMascotaPorId(id){
-       
-        fetch('http://localhost/practica-poo/selectById.php?id='+id, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
+            var formData=new FormData();
+            formData.append("id",id)
+            formData.append("accion","SelectId")
+        fetch('http://localhost/practica-poo/data.php', {
+            method: 'POST',
+            body: formData
           })
           .then(response => response.json())
           .then(data => {
@@ -119,8 +119,9 @@ class Mascota{
         formData.append("nombre", this.nombre);
         formData.append("raza", this.raza);
         formData.append("edad", this.edad);
+        formData.append("accion","Insertar");
         
-        fetch('http://localhost/practica-poo/insert.php', {
+        fetch('http://localhost/practica-poo/data.php', {
             method: 'POST',
             body: formData
         })
